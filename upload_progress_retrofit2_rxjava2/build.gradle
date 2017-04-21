@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+dependencies {
+    /*
+    retrofit
+    https://github.com/square/retrofit
+     */
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+
+    /*
+    RxJava2
+    https://github.com/ReactiveX/RxJava
+     */
+    compile 'io.reactivex.rxjava2:rxjava:2.0.8'
+}
+
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
