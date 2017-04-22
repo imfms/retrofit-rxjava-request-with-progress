@@ -6,4 +6,5 @@ A retrofit calladapter for request progress, change code from square's retrofit 
 
 - Add Download Progress
 - Add Mulit Progress Status
-- Add To Library  
+- Add To Library 
+  - Add Document & Sample
