@@ -27,7 +27,7 @@ import retrofit2.Response;
 final class CallExecuteWithProgressObservable<T> extends Observable<ProgressBean<Response<T>>> implements ProgressRequestBody.ProgressListener {
     private final Call<T> originalCall;
     private Observer<? super ProgressBean<Response<T>>> mObserver;
-    private long mTotal;
+    private Long mTotal;
 
     CallExecuteWithProgressObservable(Call<T> originalCall) {
         this.originalCall = originalCall;
@@ -74,7 +74,9 @@ final class CallExecuteWithProgressObservable<T> extends Observable<ProgressBean
     @Override
     public void onProgress(long total, long progress) {
 
-        mTotal = total;
+        if (mTotal == null) {
+            mTotal = total;
+        }
 
         mObserver.onNext(new ProgressBean<Response<T>>(
                 total, progress, null

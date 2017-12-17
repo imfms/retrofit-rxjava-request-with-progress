@@ -46,7 +46,7 @@ final class CallEnqueueWithProgressObservable<T> extends Observable<ProgressBean
         private final Call<?> call;
         private final Observer<? super ProgressBean<Response<T>>> observer;
         boolean terminated = false;
-        private long mTotal;
+        private Long mTotal;
 
         CallCallback(Call<?> call, Observer<? super ProgressBean<Response<T>>> observer) {
             this.call = call;
@@ -56,7 +56,7 @@ final class CallEnqueueWithProgressObservable<T> extends Observable<ProgressBean
         @Override
         public void onProgress(long total, long progress) {
 
-            if (mTotal == 0) {
+            if (mTotal == null) {
                 mTotal = total;
             }
 

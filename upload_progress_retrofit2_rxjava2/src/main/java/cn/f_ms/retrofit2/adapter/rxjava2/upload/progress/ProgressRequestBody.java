@@ -20,6 +20,11 @@ public final class ProgressRequestBody extends RequestBody {
      * ProgressListener interface
      */
     public interface ProgressListener {
+        /**
+         * on progress changed
+         * @param total    total
+         * @param progress current progress
+         */
         void onProgress(long total, long progress);
     }
 
@@ -66,14 +71,17 @@ public final class ProgressRequestBody extends RequestBody {
     private Sink wrapperSink(Sink sink) {
         return new ForwardingSink(sink) {
 
-            long mWrited = 0;
-            long mTotal = 0;
+            private long mWrited = 0;
+            private Long mTotal;
 
             @Override
             public void write(Buffer source, long byteCount) throws IOException {
                 super.write(source, byteCount);
-                if (mTotal == 0) {
+                if (mTotal == null) {
                     mTotal = contentLength();
+
+                    // total progress emit first
+                    mProgressListener.onProgress(mTotal, 0);
                 }
 
                 mWrited += byteCount;

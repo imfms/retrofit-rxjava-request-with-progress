@@ -8,9 +8,9 @@ import retrofit2.Call;
 /**
  * Some Utils
  */
-public class Utils {
+class Utils {
 
-    public static void replaceToProgressRequestBody(Call<?> call, ProgressRequestBody.ProgressListener listener) {
+    static void replaceToProgressRequestBody(Call<?> call, ProgressRequestBody.ProgressListener listener) {
         Request request = call.request();
         ProgressRequestBody progressRequestBody = new ProgressRequestBody(request.body(), listener);
 

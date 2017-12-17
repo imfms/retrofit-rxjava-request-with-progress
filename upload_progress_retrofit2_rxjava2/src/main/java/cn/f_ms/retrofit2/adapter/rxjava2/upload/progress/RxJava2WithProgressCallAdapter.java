@@ -54,6 +54,11 @@ final class RxJava2WithProgressCallAdapter<R> implements CallAdapter<R, Object> 
   }
 
   @Override public Object adapt(Call<R> call) {
+
+    if (call.request().body() == null) {
+        throw new IllegalStateException("can't execute requestbody progress task, specify request not exist requestbody: " + call.request());
+    }
+
     Observable<ProgressBean<Response<R>>> responseObservable = isAsync
         ? new CallEnqueueWithProgressObservable<>(call)
         : new CallExecuteWithProgressObservable<>(call);
